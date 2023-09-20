@@ -2,7 +2,7 @@ import torch
 from torch import nn 
 import matplotlib.pyplot as plt
 
-## Data (prparing and loading)
+## Data (preparing and loading)
 
 # y=a+bX
 
