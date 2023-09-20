@@ -2,7 +2,7 @@ import torch
 from torch import nn 
 import matplotlib.pyplot as plt
 
-## Data (preparing and loading)
+## Data (prparing and loading)
 
 # y=a+bX
 
@@ -45,7 +45,7 @@ def plot_prediction(train_data=X_train,
  plt.show()
 
 
-plot_prediction()
+#plot_prediction()
 
 
 class LinearRegression(nn.Module):
@@ -61,8 +61,15 @@ class LinearRegression(nn.Module):
                                            requires_grad=True,
                                            dtype=torch.float))
         
-    def forward(self,X:torch.Tensor):
-        return self.weights * X + self.bias
+    def forward(self,x:torch.Tensor):
+        return self.weights * x + self.bias
         
         
-        
+
+torch.manual_seed(42)
+model_0=LinearRegression()
+
+with torch.inference_mode():
+    y_pred = model_0(X_test)
+
+plot_prediction(predictions=y_pred)
