@@ -87,11 +87,23 @@ for epoch in range (epochs):
     optimizer.zero_grad() 
     loss.backward()
     optimizer.step()
-    
-    
-model_0.eval()
-    
+        
+    # testing
+    model_0.eval()# turn off gradint tracking
 
+    with torch.inference_mode():
+        
+        #  1. fw
+        test_pred = model_0(X_test)
+        
+        # 2. calculate the loss
+        
+        test_loss = loss_fn (test_pred, y_test)
+    
+    
+    if epoch % 10 == 0:
+        print(f"Epoch: {epoch} | Loss: {loss} | Test loss: {test_loss}")
+        print (model_0.state_dict())   
 
 with torch.inference_mode():
     y_pred = model_0(X_test)
