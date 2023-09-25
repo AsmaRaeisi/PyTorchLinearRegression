@@ -69,7 +69,32 @@ class LinearRegression(nn.Module):
 torch.manual_seed(42)
 model_0=LinearRegression()
 
+#with torch.inference_mode():
+  #  y_pred = model_0(X_test)
+
+#plot_prediction(predictions=y_pred)
+
+loss_fn = nn.L1Loss()
+optimizer = torch.optim.SGD (params = model_0.parameters(), lr = 0.001 )
+
+
+epochs=1000
+
+for epoch in range (epochs):
+    model_0.train()
+    y_pred =model_0(X_train)
+    loss = loss_fn (y_pred,y_train) 
+    optimizer.zero_grad() 
+    loss.backward()
+    optimizer.step()
+    
+    
+model_0.eval()
+    
+
+
 with torch.inference_mode():
     y_pred = model_0(X_test)
 
-plot_prediction(predictions=y_pred)
+
+plot_prediction(predictions=y_pred)    
